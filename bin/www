@@ -18,8 +18,8 @@ app.set('port', port);
 
 // 配置https
 var options = {
-  pfx: fs.readFileSync("./superliu.cn.pfx"),
-  passphrase: '1626s4z4tle6l'
+  pfx: fs.readFileSync("./public/superliu.cn.pfx"),
+  passphrase:'1626s4z4tle6l'
 };
 https.createServer(options,app).listen(443);
 
