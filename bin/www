@@ -4,21 +4,21 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const debug = require('debug')('server:server');
-const http = require('http');
-const https = require('https');
-const fs = require('fs');
+var app = require('../app');
+var debug = require('debug')('server:server');
+var http = require('http');
+var https = require('https');
+var fs = require('fs');
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '80');
+var port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 // 配置https
-const options = {
-  pfx: fs.readFileSync("./IIS/superliu.cn.pfx"),
+var options = {
+  pfx: fs.readFileSync("./bin/superliu.cn.pfx"),
   passphrase: '1626s4z4tle6l'
 };
 https.createServer(options,app).listen(443);
@@ -29,7 +29,7 @@ https.createServer(options,app).listen(443);
  * Create HTTP server.
  */
 
-const server = http.createServer(app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -46,7 +46,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  const port = parseInt(val, 10);
+  var port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -70,7 +70,7 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string'
+  var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -94,8 +94,8 @@ function onError(error) {
  */
 
 function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === 'string'
+  var addr = server.address();
+  var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
