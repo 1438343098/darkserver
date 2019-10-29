@@ -18,7 +18,7 @@ app.set('port', port);
 
 // 配置https
 const options = {
-  pfx: fs.readFileSync("./IIS/superliu.cn.pfx"),
+  pfx: fs.readFileSync("./bin/superliu.cn.pfx"),
   passphrase: 'mcamqzf7zr0vm'
 };
 https.createServer(options,app).listen(443);
