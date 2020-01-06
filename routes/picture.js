@@ -4,7 +4,7 @@ var https = require("https")
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-	console.log(req.query,788888)
+	console.log(req.query,78888)
 	if (req.query["text"] && req.query.text) {
 		var urls = "https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=" + encodeURI(req.query.text)+'&page='+ req.query.page
 	} else {
