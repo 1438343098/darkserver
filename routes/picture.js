@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 	} else {
 		var urls ="https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=%E5%9B%BE%E7%89%87&page="+ req.query.page
 	}
-
+	console.log(req.query.text)
 	let datas = ""
 	https.get(urls, function(okdata) {
 		okdata.setEncoding("utf8")
