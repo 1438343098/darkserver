@@ -34,7 +34,7 @@ http.createServer(function(request, response) {
             }
         });
     }
-}).listen(6606, '127.0.0.1');
+}).listen(6606);
 
 function sign(secret, data) {
     return 'sha1=' + crypto.createHmac('sha1', secret).update(data).digest('hex');
