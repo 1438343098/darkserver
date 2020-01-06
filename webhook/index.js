@@ -9,7 +9,7 @@ var time = log2file.time
 // 在Webhooks中设定的secret
 var secret = 'liu19971026'
 // 在Webhooks中设定的Payload URL
-var url = 'http://superliu.cn/webhook'
+var url = 'http://superliu.cn:6606'
 // 当前执行状态
 var running = false
 // 是否有等待中的任务
@@ -18,7 +18,7 @@ var queue = [];
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type':'application/json'});
     response.end();
-	console.log(777777)
+	console.log(777777,request.headers['x-github-event'])
     if (request.headers['x-github-event'] && request.headers['x-github-event'] === 'push') {
         log('接收到新的push事件.');
 
