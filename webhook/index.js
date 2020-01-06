@@ -1,5 +1,5 @@
 var createHandler = require('github-webhook-handler')
-var handler = createHandler({ path: '/webhook', secret: 'liu19971026' })
+var handler = createHandler({ path: 'http://superliu.cn/webhook', secret: 'liu19971026' })
 // 上面的 secret 保持和 GitHub 后台设置的一致
 var express = require('express');
 var router = express.Router();
