@@ -12,7 +12,6 @@ router.get('/', function(req, res, next) {
 	}
 
 	let datas = ""
-	console.log(urls)
 	https.get(urls, function(okdata) {
 		okdata.setEncoding("utf8")
 		okdata.on("data", chunk => datas += chunk)
