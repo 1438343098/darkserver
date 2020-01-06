@@ -18,7 +18,7 @@ var queue = [];
 http.createServer(function(request, response) {
     response.writeHead(200, {'Content-Type':'application/json'});
     response.end();
-
+	console.log(777777)
     if (request.headers['x-github-event'] && request.headers['x-github-event'] === 'push') {
         log('接收到新的push事件.');
 
