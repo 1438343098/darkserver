@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var picTure = require('./routes/picture');
-var webhook = require('./webhook/index.js');
+var webhook = require('./webhook/index');
 
 var app = express();
 

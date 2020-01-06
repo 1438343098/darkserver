@@ -4,11 +4,10 @@ var handler = createHandler({ path: '/webhook', secret: 'liu19971026' })
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
+	console.log(handler,8888888)
   handler(req, res, function (err) {
-    res.statusCode = 404
-    res.end('no such location')
+    res.send('no such location')
   })
 });
 
@@ -17,7 +16,6 @@ function run_cmd(cmd, args, callback) {
   var spawn = require('child_process').spawn;
   var child = spawn(cmd, args);
   var resp = "";
-
   child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
   child.stdout.on('end', function() { callback (resp) });
 }
@@ -32,3 +30,5 @@ handler.on('push', function (event) {
     event.payload.ref);
     run_cmd('sh', ['./index.sh',event.payload.repository.name], function(text){ console.log(text) });
 })
+
+module.exports = router;
