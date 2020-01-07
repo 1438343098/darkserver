@@ -13,7 +13,7 @@ handler.on('error', function (err) {
   console.error('Error:', err.message)
 })
 
-handler.on('push', function (event) {
+handler.on('*', function (event) {
   console.log(
     'Received a push event for %s to %s',
     event.payload.repository.name,
