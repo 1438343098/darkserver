@@ -1,4 +1,5 @@
 // install with: npm install @octokit/webhooks
+const EventSource = require('eventsource')
 const WebhooksApi = require("@octokit/webhooks");
 const webhooks = new WebhooksApi({
   secret: "liu19971026"
