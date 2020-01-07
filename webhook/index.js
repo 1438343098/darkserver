@@ -1,31 +1,23 @@
-// install with: npm install @octokit/webhooks
-const EventSource = require('eventsource')
-const WebhooksApi = require("@octokit/webhooks");
-const webhooks = new WebhooksApi({
-  secret: "liu19971026"
-});
+var http = require('http')
+var createHandler = require('node-github-webhook')
+var handler = createHandler({ path: '/push', secret: 'liu19971026' }) // 单个仓库
 
-const webhookProxyUrl = "http://superliu.cn:6606/push"; // replace with your own Webhook Proxy URL
-const source = new EventSource(webhookProxyUrl);
-source.onmessage = event => {
-  const webhookEvent = JSON.parse(event.data);
-  webhooks
-    .verifyAndReceive({
-      id: webhookEvent["x-request-id"],
-      name: webhookEvent["x-github-event"],
-      signature: webhookEvent["x-hub-signature"],
-      payload: webhookEvent.body
-    })
-    .catch(console.error);
-};
+http.createServer(function (req, res) {
+  handler(req, res, function (err) {
+    res.statusCode = 404
+    res.end('no such location')
+  })
+}).listen(6606)
 
-webhooks.on("push", ({ id, name, payload }) => {
-  console.log(name, "event received");
-});
+handler.on('error', function (err) {
+  console.error('Error:', err.message)
+})
 
-
-
-require("http")
-  .createServer(webhooks.middleware)
-  .listen(6606);
-// can now receive webhook events at port 6606
+handler.on('push', function (event) {
+  console.log(
+    'Received a push event for %s to %s',
+    event.payload.repository.name,
+    event.payload.ref,
+	event.path
+  )
+})
