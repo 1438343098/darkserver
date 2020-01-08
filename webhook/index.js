@@ -1,5 +1,5 @@
 const { exec } = require('child_process');
-const shellOrder = 'sh ./index.sh';
+const shellOrder = 'sh index.sh';
 const schedule = require('node-schedule')
 schedule.scheduleJob('60 * * * * *', () => {
 	console.log('定时任务执行了')
