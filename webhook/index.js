@@ -1,12 +1,15 @@
-const { exec } = require('child_process');
-const shellOrder = 'sh index.sh';
-const schedule = require('node-schedule')
-schedule.scheduleJob('60 * * * * *', () => {
-	console.log('定时任务执行了')
-  exec(shellOrder, (err, stdout, stderr) => {
-    if(err) {
-      console.log('err: ', err)
-    }
-	console.log('定时执行成功')
-  })
-})
+let time = null
+
+time = setInterval(()=>{
+	run_cmd('sh', ['./index.sh'], function(text){ console.log(text) });
+},1000 * 60 * 1)
+
+function run_cmd(cmd, args, callback) {
+	console.log("执行了nodejs定时任务")
+  var spawn = require('child_process').spawn;
+  var child = spawn(cmd, args);
+  var resp = "";
+  child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
+  child.stdout.on('end', function() { callback (resp) });
+}
+
