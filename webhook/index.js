@@ -1,7 +1,8 @@
 let time = null
 time = setInterval(()=>{
 	run_cmd('sh', ['./index.sh'], function(text){ console.log(text) });
-},1000 * 60 * 2)
+},1000 * 60 * 60 * 24 * 1)
+// 毫秒 * 秒 * 分 * 小时 * 天
 function run_cmd(cmd, args, callback) {
 	console.log("执行了nodejs定时任务")
   var spawn = require('child_process').spawn;
