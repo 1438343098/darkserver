@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('index.html');
+  res.send('首页接口');
 });
 
 module.exports = router;

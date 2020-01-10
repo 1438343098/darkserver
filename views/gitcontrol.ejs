@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>git拉取设置</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <form action="/gitcontrol/startset" method="post">
+    	设置时间<input type="text" name="time" value=<%= time %> />分钟
+		<br>
+		设置开关
+		<br>
+		开<input type="radio" name="set"  value="1" />
+		<br>
+		关<input type="radio" name="set"  value="0" />
+		<br>
+		开关状态 ： <%= set %>
+		<br>
+    	<input type="submit" value="提交"/>
+    </form>
+  </body>
+</html>
