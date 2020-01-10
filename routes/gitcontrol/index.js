@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/startset', function(req, res, next) {
 	datas = req.body
-	console.log(datas,555)
 	if (datas.set == '1'){
 		console.log('开启定时任务')
 		time = setInterval(() => {
@@ -32,11 +31,11 @@ router.post('/startset', function(req, res, next) {
 
 function run_cmd(cmd, args, callback) {
 	console.log("执行了nodejs定时任务")
-	// var spawn = require('child_process').spawn;
-	// var child = spawn(cmd, args);
-	// var resp = "";
-	// child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
-	// child.stdout.on('end', function() { callback (resp) });
+	var spawn = require('child_process').spawn;
+	var child = spawn(cmd, args);
+	var resp = "";
+	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
+	child.stdout.on('end', function() { callback (resp) });
 }
 
 
