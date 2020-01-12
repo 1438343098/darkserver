@@ -16,7 +16,7 @@ router.post('/startset', function(req, res, next) {
 	if (datas.set == '1'){
 		console.log('开启定时任务')
 		time = setInterval(() => {
-			run_cmd('bash', 'index.sh', function(text) {
+			run_cmd('sh', '/var/www/darkserver/routes/gitcontrol/index.sh', function(text) {
 				console.log(text)
 			});
 		}, 1000 * 60 * datas.time )
