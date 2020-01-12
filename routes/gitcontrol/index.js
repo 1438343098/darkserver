@@ -16,7 +16,7 @@ router.post('/startset', function(req, res, next) {
 	if (datas.set == '1'){
 		console.log('开启定时任务')
 		time = setInterval(() => {
-			run_cmd('sh', '/var/www/darkserver/routes/gitcontrol/index.sh', function(text) {
+			run_cmd('sh /var/www/darkserver/routes/gitcontrol/index.sh', function(text) {
 				console.log(text)
 			});
 		}, 1000 * 60 * datas.time )
@@ -29,9 +29,9 @@ router.post('/startset', function(req, res, next) {
 	res.render('gitcontrol', datas)
 });
 
-function run_cmd(cmd, instructions, callback) {
+function run_cmd( instructions, callback) {
 	console.log("执行了nodejs定时任务",cmd, instructions)
-	const child = exec(cmd, {shell:instructions});
+	const child = exec(instructions);
 	const resp = "";
 	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
 	child.stdout.on('end', function() { callback (resp) });
