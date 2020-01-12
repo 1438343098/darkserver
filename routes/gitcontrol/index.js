@@ -30,7 +30,7 @@ router.post('/startset', function(req, res, next) {
 });
 
 function run_cmd( instructions, callback) {
-	console.log("执行了nodejs定时任务",cmd, instructions)
+	console.log("执行了nodejs定时任务", instructions)
 	const child = exec(instructions);
 	const resp = "";
 	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
