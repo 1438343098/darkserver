@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
+const router = express.Router();
+const exec = require('child_process').execSync
 let datas = {
 	time:1,
 	set:1
@@ -31,9 +31,8 @@ router.post('/startset', function(req, res, next) {
 
 function run_cmd(cmd, instructions, callback) {
 	console.log("执行了nodejs定时任务")
-	const exec = require('child_process').execSync
-	var child = exec(cmd, instructions);
-	var resp = "";
+	const child = exec(cmd, instructions);
+	const resp = "";
 	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
 	child.stdout.on('end', function() { callback (resp) });
 }
