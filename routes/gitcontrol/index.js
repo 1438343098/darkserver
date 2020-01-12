@@ -3,7 +3,7 @@ const router = express.Router();
 const exec = require('child_process').exec
 let datas = {
 	time:1,
-	set:1
+	set:0
 }
 let time = null
 /* GET home page. */
@@ -30,7 +30,7 @@ router.post('/startset', function(req, res, next) {
 });
 
 function run_cmd(cmd, instructions, callback) {
-	console.log("执行了nodejs定时任务")
+	console.log("执行了nodejs定时任务",cmd, instructions)
 	const child = exec(cmd, {shell:instructions});
 	const resp = "";
 	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
