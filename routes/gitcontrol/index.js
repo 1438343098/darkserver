@@ -16,7 +16,7 @@ router.post('/startset', function(req, res, next) {
 	if (datas.set == '1'){
 		console.log('开启定时任务')
 		time = setInterval(() => {
-			run_cmd('sh', ['./index.sh'], function(text) {
+			run_cmd('bash', 'index.sh', function(text) {
 				console.log(text)
 			});
 		}, 1000 * 60 * datas.time )
@@ -29,10 +29,10 @@ router.post('/startset', function(req, res, next) {
 	res.render('gitcontrol', datas)
 });
 
-function run_cmd(cmd, args, callback) {
+function run_cmd(cmd, instructions, callback) {
 	console.log("执行了nodejs定时任务")
-	var spawn = require('child_process').spawn;
-	var child = spawn(cmd, args);
+	const exec = require('child_process').execSync
+	var child = exec(cmd, instructions);
 	var resp = "";
 	child.stdout.on('data', function(buffer) { resp += buffer.toString(); });
 	child.stdout.on('end', function() { callback (resp) });
