@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const picTure = require('./routes/picture');
+const Music = require('./routes/music');
 const gitcontrol = require('./routes/gitcontrol/index');
 const app = express();
 
@@ -28,7 +29,7 @@ app.use(bodyParser.json())
 app.use('/', indexRouter);
 app.use('/picture', picTure);
 app.use('/gitcontrol', gitcontrol);
-
+app.use("/music",Music)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

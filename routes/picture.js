@@ -3,12 +3,16 @@ var router = express.Router();
 var https = require("https")
 /* GET home page. */
 
+// 图片
 router.get('/', function(req, res, next) {
-	console.log(req.query,'a5a')
+	console.log(req.query, 'a5a')
 	if (req.query["text"] && req.query.text) {
-		var urls = "https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=" + encodeURI(req.query.text)+'&page='+ req.query.page
+		var urls = "https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=" +
+			encodeURI(req.query.text) + '&page=' + req.query.page
 	} else {
-		var urls ="https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=%E5%9B%BE%E7%89%87&page="+ req.query.page
+		var urls =
+			"https://api.bilibili.com/x/web-interface/search/type?search_type=photo&highlight=1&keyword=%E5%9B%BE%E7%89%87&page=" +
+			req.query.page
 	}
 	let datas = ""
 	https.get(urls, function(okdata) {
@@ -27,5 +31,6 @@ router.get('/listInfo', function(req, res, next) {
 		okdata.on("end", () => res.end(datas))
 	})
 });
+
 
 module.exports = router;
