@@ -22,7 +22,6 @@ var baseCookie=`JSESSIONID-WYYY=${jsessionid}; _iuqxldmzr_=32; _ntes_nnid=${nuid
 function createWebAPIRequest(path, data, c, response, method) {
 	method = method ? method : "POST"
 	var music_req = '';
-	console.log(Encrypt)
 	var cryptoreq = Encrypt(data);
 	var http_client = http.request({
 		hostname: 'music.163.com',
@@ -169,7 +168,7 @@ app.get(dir + '/playlist/hot', function(request, response) {
 app.get(dir + '/personalized/newsong', function(request, response) {
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
 	var data = {
-		type: "recommend"
+		type: "all"
 	};
 	createWebAPIRequest('/api/personalized/newsong', data, cookie, response)
 })
@@ -334,9 +333,9 @@ app.get(dir + '/top/artist', function(request, response) {
 //新歌上架 ,type ALL, ZH,EA,KR,JP
 app.get(dir + '/top/songs', function(request, response) {
 	var data = {
-		'type': request.query.type,
-		'area': request.query.type,
-		'cat': request.query.type,
+		'type': request.query.type || 'all',
+		'area': request.query.type || 'all',
+		'cat': request.query.type || 'all',
 		"csrf_token": ""
 	}
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
@@ -530,7 +529,6 @@ app.get(dir + '/user/subcount', function(request, response) {
 //云盘数据
 app.get(dir + '/user/cloud', function(request, response) {
 	var cookie = request.get('Cookie') ? request.get('Cookie') : (request.query.cookie ? request.query.cookie : '');
-	console.log(request.get('Cookie') + '\n' + request.query.cookie + '\n' + cookie);
 	var data = {
 		limit: request.query.limit,
 		offset: request.query.offset,
@@ -1060,7 +1058,6 @@ app.get(dir + '/playlist/fav', function(request, response) {
 		csrf_token: ''
 	}
 	var url = '/weapi/playlist/' + (request.query.type == 1 ? 'subscribe' : 'unsubscribe') + "?csrf_token=''";
-	console.log(url);
 	createWebAPIRequest(url, data, cookie, response)
 })
 app.all('*', function(req, res, next) {
@@ -1081,7 +1078,6 @@ function id2Url(pic_str) {
 	}
 	var md5 = crypto.createHash('md5');
 	md5 = md5.update(arr2Str(songId))
-	console.info(md5);
 	var res = md5.digest('base64')
 	res = res.replace(/\//g, '_')
 	res = res.replace(/\+/, '-')
