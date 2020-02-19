@@ -394,7 +394,7 @@ app.get(dir + '/top/playlist', function(request, response) {
 app.get(dir + '/top/playlist/highquality', function(request, response) {
 	var data = {
 		'cat': request.query.type,
-		'offset': request.query.offset,
+		'offset': request.query.page,
 		"limit": request.query.limit,
 		"csrf_token": ""
 	}
