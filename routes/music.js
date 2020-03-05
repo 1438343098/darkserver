@@ -440,7 +440,7 @@ app.get(dir + '/comments', function(request, response) {
 		"total": false,
 		"csrf_token": ""
 	};
-	createWebAPIRequest('/weapi/v1/resource/' + type + '/' + id, data, cookie, response)
+	createWebAPIRequest('/weapi/v1/resource/hotcomments/R_SO_4_' + id, data, cookie, response)
 });
 
 //艺术家
