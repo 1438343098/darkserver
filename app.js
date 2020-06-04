@@ -4,10 +4,17 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+// app
 const indexRouter = require('./routes/index');
 const picTure = require('./routes/picture');
 const Music = require('./routes/music');
+
+// pc
+const pcImg = require('./routes/pc/pcImg');
+
+// control
 const gitcontrol = require('./routes/gitcontrol/index');
+
 const app = express();
 
 // view engine setup
@@ -29,10 +36,16 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
  
+ // app
 app.use('/', indexRouter);
 app.use('/picture', picTure);
-app.use('/gitcontrol', gitcontrol);
 app.use("/music",Music)
+
+// pc
+app.use('/pcImg', pcImg);
+
+// control
+app.use('/gitcontrol', gitcontrol);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
